@@ -44,16 +44,17 @@ document.querySelectorAll("button").forEach((btn) => {
 
 counter.current.onHandlerChangeValues = (values) => {
   if (values.number === 100) {
-    alert( "I'm afraid I can't let you exceed the 100 number, but thanks for chill :)")
-    counter.current.number = 0
+    alert(
+      "I'm afraid I can't let you exceed the 100 number, but thanks for chill :)"
+    );
+    counter.current.number = 0;
 
-    counter.current.title = "Sorry fella :("
+    counter.current.title = "Sorry fella :(";
     setTimeout(() => {
-      counter.current.title = "Counter"
-    }, 2000)
+      counter.current.title = "Counter";
+    }, 2000);
   }
 };
-
 
 const disabledButtonMessage = `Fill properly The 
 Following fields to active this 
@@ -77,21 +78,21 @@ formValues.current.onHandlerChangeValues = ({ name, age }) => {
 
   if (name.length > 2 && age >= 18) {
     disabledButton.assignSignalValues.forEach((btn) => (btn.disabled = false));
-    return disabledButton.current = "You may now submit :)";
+    return (disabledButton.current = "You may now submit :)");
   }
 
-  disabledButton.assignSignalValues.forEach(btn => {
+  disabledButton.assignSignalValues.forEach((btn) => {
     if (!btn.disabled) {
-      btn.disabled = true
+      btn.disabled = true;
     }
-  })
+  });
 
-  disabledButton.current = disabledButtonMessage
+  disabledButton.current = disabledButtonMessage;
 };
 
 document.querySelector("#submitForm").addEventListener("submit", (e) => {
   e.preventDefault();
   alert(`Right now ${formValues.current.name} it feels like nothing is happening, 
   but I'm optimistic that things will pick up 
-  soon.`)
-})
+  soon.`);
+});

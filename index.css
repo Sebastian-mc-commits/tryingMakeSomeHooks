@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Tilt+Neon&display=swap');
+
+:root {
+  --dark: rgb(21, 20, 20);
+  --dusky: rgb(66, 64, 64);
+  --gray: rgb(175, 169, 169);
+  --light-gray: rgb(241, 241, 241);
+  --random-color: rgb(233, 151, 151);
+  --radius: 7px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab', serif;
+  font-family: 'Tilt Neon', cursive;
+}
+
+.counterContainer {
+  margin: 2rem;
+  background-color: var(--light-gray);
+  box-shadow: 2px 2px 4px var(--light-gray);
+  padding: 1.4rem;
+  border-radius: var(--radius);
+}
+
+.counterContainer p {
+  background-color: var(--random-color);
+  display: inline;
+  border-radius: var(--radius);
+  padding: 1rem;
+  cursor: default;
+  transition: background-color 0.5s;
+}
+
+.counterButtons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input {
+  padding: 7px;
+  border-radius: var(--radius);
+  border: 2px rgb(188, 197, 194) solid;
+  outline: none;
+  font-size: large;
+}
+
+input[type="submit"],
+button {
+  background-color: var(--dark);
+  border-radius: var(--radius);
+  padding: 7px;
+  font-size: larger;
+  color: white;
+  border: none;
+  margin: 2%;
+  transition: background-color 0.4s;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: var(--dusky);
+}
+
+#submitForm {
+  border: 1px var(--gray) solid;
+  margin: auto;
+  width: 90%;
+  border-radius: var(--radius);
+}
+.inputContainer {
+  margin: 3% 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+input[type="submit"]:disabled {
+  background-color: var(--gray);
+  cursor: no-drop;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <div class="counterContainer">
+      <p><span data-counter-title></span> <span data-counter-number></span></p>
+      <div class="counterButtons">
+        <button data-type="increment">Increment Counter</button>
+        <button data-type="reset">Reset Counter</button>
+        <button data-type="decrement">Decrement Counter</button>
+      </div>
+    </div>
+
+    <form id="submitForm">
+      <div class="inputContainer">
+        <input type="text" data-input-name />
+  
+        <input type="number" data-input-age />
+
+      </div>
+      <input type="submit" disabled data-disabled />
+    </form>
+    <button data-type="setTheInputWithRandomNumbers">:D</button>
+  </body>
+
+  <script>
+    const randomColor = () => {
+        const color = "#" + ((1 << 24) * Math.random() | 0).toString(16);
+        document.documentElement.style.setProperty('--random-color', color);
+    }
+
+    setInterval(() => {
+      randomColor()
+    }, 1000)
+  </script>
+  <script src="./index.js" type="module"></script>
+</html>

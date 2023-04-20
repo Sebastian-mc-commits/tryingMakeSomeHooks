@@ -18,15 +18,24 @@
     </div>
 
     <form id="submitForm">
-      <div class="inputContainer">
+      <div class="inputContainer" data-animate-class>
         <input type="text" data-input-name />
   
         <input type="number" data-input-age />
 
       </div>
-      <input type="submit" disabled data-disabled />
+
+      <div class="inputContainer">
+        <input type="text" data-animate-class data-animate-change_placeholder />
+  
+        <input type="text" data-animate-val data-animate-placeholder />
+
+      </div>
+      <input type="submit" data-disabled_button-disabled data-disabled_button-message data-animate-class/>
     </form>
     <button data-type="setTheInputWithRandomNumbers">:D</button>
+    <p data-animate-change_placeholder></p>
+    <button data-type="translateElement">Translate</button>
   </body>
 
   <script>

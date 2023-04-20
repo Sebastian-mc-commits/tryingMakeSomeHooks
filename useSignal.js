@@ -1,3 +1,35 @@
+import DOM_ENUM from "./const/DOM.enum.js";
+
+const assignValue = (element, value) => {
+  if (element.tagName === "INPUT") {
+    element.value = value;
+  } else element.textContent = value;
+};
+
+export const setValues = ({ elements, value, dataValue, isObj }) => {
+  elements.forEach((el) => {
+    if (isObj) {
+      for (let key in value) {
+        const datasetKey =
+          key.length === 1
+            ? key.toUpperCase()
+            : key.charAt(0).toUpperCase() + key.slice(1);
+
+        const condition =
+          typeof el.dataset[`${dataValue}${datasetKey}`] !== "undefined";
+        if (condition && Object.keys(DOM_ENUM).includes(key)) {
+          el[DOM_ENUM[key]] = value[key];
+        } else if (condition) {
+          assignValue(el, value[key]);
+        }
+      }
+      return
+    }
+
+    assignValue(el, value);
+  });
+};
+
 export const setSignalValues = ({ dataValue, isObj = false, value }) => {
   let attributes = `[data-${dataValue}]`;
   if (isObj) {
@@ -6,28 +38,13 @@ export const setSignalValues = ({ dataValue, isObj = false, value }) => {
       .join(", ");
   }
   const elements = document.querySelectorAll(attributes);
-  elements.forEach((el) => {
-    let setValue = value;
-    if (isObj) {
-      for (let key in value) {
-        const datasetKey =
-          key.length === 1
-            ? key.toUpperCase()
-            : key.charAt(0).toUpperCase() + key.slice(1);
 
-        if (typeof el.dataset[`${dataValue}${datasetKey}`] !== "undefined") {
-          setValue = value[key];
-          break;
-        }
-      }
-    }
-    if (el.tagName === "INPUT") {
-      return (el.value = setValue);
-    }
-
-    return (el.textContent = setValue);
+  setValues({
+    elements,
+    dataValue,
+    value,
+    isObj
   });
-
   return elements;
 };
 
@@ -58,11 +75,15 @@ const useSignal = (signal, signalName) => {
             value: obj
           });
 
-          if (
+          const condition =
             obj?.onHandlerChangeValues &&
-            typeof obj?.onHandlerChangeValues === "function"
-          ) {
-            obj.onHandlerChangeValues(current);
+            typeof obj?.onHandlerChangeValues === "function";
+
+          if (condition) {
+            obj.onHandlerChangeValues(current, {
+              keyChanged: key,
+              valueChanged: value
+            });
           }
 
           return true;

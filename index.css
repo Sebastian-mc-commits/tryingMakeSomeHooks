@@ -13,6 +13,7 @@
   padding: 0;
   font-family: 'Roboto Slab', serif;
   font-family: 'Tilt Neon', cursive;
+  transition: transform 0.5s;
 }
 
 .counterContainer {
@@ -83,4 +84,10 @@ button:hover {
 input[type="submit"]:disabled {
   background-color: var(--gray);
   cursor: no-drop;
+}
+
+.translateElement {
+  transform: translateX(50%);
+  background-color: var(--dusky);
+  color: white;
 }

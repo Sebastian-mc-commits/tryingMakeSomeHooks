@@ -1,5 +1,7 @@
 import useSignal from "./useSignal.js";
+import bindEvent from "./utils/DOM/bindEvents.js";
 
+const handleEvent = {};
 const counter = useSignal(
   {
     number: 0,
@@ -16,7 +18,7 @@ const formValues = useSignal(
   "input"
 );
 
-counter.current.onHandlerChangeValues = (values) => {
+counter.onHandlerChangeValues = (values) => {
   if (values.number === 100) {
     alert(
       "I'm afraid I can't let you exceed the 100 number, but thanks for chill :)"
@@ -42,18 +44,7 @@ const disabledButton = useSignal(
   "disabled_button"
 );
 
-formValues.assignSignalValues.forEach((el) => {
-  el.oninput = ({ target }) => {
-    const dataset = target.dataset;
-    if (Object.keys(dataset).includes("inputName")) {
-      formValues.current.name = target.value.replace(/[0-9\s]/g, "");
-    } else if (Object.keys(dataset).includes("inputAge")) {
-      formValues.current.age = target.value.replace(/-\d+/g, 0);
-    }
-  };
-});
-
-formValues.current.onHandlerChangeValues = ({ name, age }) => {
+formValues.onHandlerChangeValues = ({ name, age }) => {
   if (name.length > 2 && age >= 18) {
     disabledButton.current.disabled = false;
     disabledButton.current.message = "You may now submit :)";
@@ -62,13 +53,6 @@ formValues.current.onHandlerChangeValues = ({ name, age }) => {
     disabledButton.current.message = disabledButtonMessage;
   }
 };
-
-document.querySelector("#submitForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  alert(`Right now ${formValues.current.name} it feels like nothing is happening, 
-  but I'm optimistic that things will pick up 
-  soon.`);
-});
 
 const changeCertainValues = useSignal(
   {
@@ -95,37 +79,70 @@ changeCertainValues.assignSignalValues.forEach((el) => {
   el.oninput = handleOnChangeInput;
 });
 
-document.querySelectorAll("button").forEach((btn) => {
-  btn.onclick = (e) => {
-    switch (e.target.dataset.type) {
-      case "increment": {
-        counter.current.number++;
-        break;
-      }
+changeCertainValues.onHandlerChangeValues = (obj, { key, valueChanged }) => {};
 
-      case "decrement": {
-        counter.current.number--;
-        break;
-      }
+handleEvent.increment = () => counter.current.number++;
 
-      case "reset": {
-        counter.current.number = 0;
-        break;
-      }
+handleEvent.decrement = () => counter.current.number--;
 
-      case "setTheInputWithRandomNumbers": {
-        formValues.current.name = Math.random() * 46;
-        break;
-      }
+handleEvent.reset = () => (counter.current.number = 0);
 
-      case "translateElement": {
-        if (changeCertainValues.current.class === "translateElement") {
-          changeCertainValues.current.class = "";
-          break;
-        }
-        changeCertainValues.current.class = "translateElement";
-        break;
-      }
+handleEvent.setTheInputWithRandomNumbers = () => {
+  formValues.current.name = Math.random() * 46;
+};
+
+handleEvent.translateElement = ({events}) => {
+  events.increment()
+  if (changeCertainValues.current.class === "translateElement") {
+    changeCertainValues.current.class = "";
+    return;
+  }
+  changeCertainValues.current.class = "translateElement";
+};
+
+handleEvent.logTheNestedObject = () => {
+  changeCertainValues.current.val = {
+    classList: {
+      toggle: "translateElement"
     }
   };
-});
+};
+
+handleEvent.handleAge = ({event}) => {
+  formValues.current.age = event.target.value.replace(/-\d+/g, 0);
+}
+
+handleEvent.handleName = ({event}) => {
+  formValues.current.name = event.target.value.replace(/[0-9\s]/g, "");
+}
+
+handleEvent.submitForm = ({event}) => {
+  event.preventDefault()
+  alert(`Right now ${formValues.current.name} it feels like nothing is happening, 
+  but I'm optimistic that things will pick up 
+  soon.`);
+}
+
+const bindEventConfig = {
+  datasets: [
+    {
+      dataset: "[data-onclick-type]",
+      event: "click"
+    },
+
+    {
+      dataset: "[data-oninput_change-type]",
+      event: "input"
+    },
+
+    {
+      dataset: "[data-onsubmit-type]",
+      event: "submit"
+    }
+  ]
+}
+
+
+bindEvent(bindEventConfig);
+
+Object.assign(bindEvent, handleEvent);

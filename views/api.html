@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/API.css">
+  </head>
+  <body>
+    <div class="buttonContainer">
+      <button data-page-disabled data-onclick-type="prevPage">Prev <span data-page-prev></span></button>
+      <button data-page-random></button>
+      <button data-onclick-type="nextPage">Next <span data-page-next></span></button>
+      <input type="number" data-input-search_chapter class="searchChapter">
+    </div>
+
+    <h3 data-loader-value data-loader-hidden class="loader"></h3>
+    <button data-input-top_chapter class="recommendChapter"></button>
+    
+    <div class="randomImage">
+      <img  data-input-src alt="Random image of rick and morty" class="randomImage">
+    </div>
+    <h4 class="currentPage">Current Page <strong data-page-current_page></strong></h4>
+    <div id="render" class="render"></div>
+    <script src="../js/API.js" type="module"></script>
+  </body>
+</html>

@@ -4,7 +4,8 @@ const DOM_ENUM = {
   class: 'className',
   id: 'id',
   disabled: 'disabled',
-  hidden: 'hidden'
+  hidden: 'hidden',
+  src: "src"
 }
 
 export default DOM_ENUM

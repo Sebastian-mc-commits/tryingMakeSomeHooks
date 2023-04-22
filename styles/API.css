@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Tilt+Neon&display=swap');
+
+:root {
+  --dark: rgb(21, 20, 20);
+  --dusky: rgb(66, 64, 64);
+  --gray: rgb(175, 169, 169);
+  --light-gray: rgb(241, 241, 241);
+  --random-color: rgb(233, 151, 151);
+  --radius: 7px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab', serif;
+  font-family: 'Tilt Neon', cursive;
+  transition: transform 0.5s;
+}
+
+button {
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: var(--radius);
+  border: none;
+  outline: none;
+  background-color: var(--dark);
+  color: white;
+  font-size: large;
+  transition: background-color 0.5s;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--gray);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+img {
+  width: 100%;
+}
+
+.buttonContainer {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: var(--dusky);
+}
+
+.render {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20% auto;
+  justify-content: center;
+  align-content: center;
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  font-size: x-large;
+}
+
+.currentPage {
+  position: fixed;
+  top: 40%;
+  left: 95%;
+  background-color: var(--light-gray);
+  padding: 1rem;
+  border-radius: calc(var(--radius) * 2);
+  padding-left: 4rem;
+  cursor: default;
+}
+
+.currentPage::before {
+  position: absolute;
+  inset: 0;
+  content: " ";
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 2%;
+  width: 20%;
+  height: 40%;
+  border-radius: 100%;
+  background-color: var(--random-color);
+}
+
+.currentPage:hover {
+  transform: translateX(-80%);
+}
+
+.searchChapter {
+  z-index: 1000;
+  border-radius: var(--radius);
+  border: none;
+  outline: none;
+  width: 6rem;
+  font-size: xx-large;
+  text-align: center;
+}
+
+.recommendChapter {
+  position: fixed;
+  top: 40%;
+  left: 2%;
+  font-size: x-large;
+}
+
+.randomImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.randomImage img {
+  width: 80%;
+  height: 20rem;
+  object-fit: cover;
+  margin: auto;
+}

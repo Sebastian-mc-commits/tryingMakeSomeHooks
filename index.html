@@ -5,48 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div class="counterContainer">
       <p><span data-counter-title></span> <span data-counter-number></span></p>
       <div class="counterButtons">
-        <button data-type="increment">Increment Counter</button>
-        <button data-type="reset">Reset Counter</button>
-        <button data-type="decrement">Decrement Counter</button>
+        <button data-onclick-type="increment">Increment Counter</button>
+        <button data-onclick-type="reset">Reset Counter</button>
+        <button data-onclick-type="decrement">Decrement Counter</button>
       </div>
     </div>
 
-    <form id="submitForm">
+    <form data-onsubmit-type="submitForm" data-animate-class id="submitForm">
+      <a href="./views/api.html">Go to API</a>
       <div class="inputContainer" data-animate-class>
-        <input type="text" data-input-name />
-  
-        <input type="number" data-input-age />
+        <input type="text" data-input-name data-oninput_change-type="handleName" />
 
+        <input
+          type="number"
+          data-input-age
+          data-oninput_change-type="handleAge"
+        />
       </div>
 
       <div class="inputContainer">
-        <input type="text" data-animate-class data-animate-change_placeholder />
-  
-        <input type="text" data-animate-val data-animate-placeholder />
+        <input
+          type="text"
+          data-animate-class
+          data-animate-change_placeholder
+        />
 
+        <input
+          type="text"
+          data-animate-val
+          data-animate-placeholder
+        />
       </div>
-      <input type="submit" data-disabled_button-disabled data-disabled_button-message data-animate-class/>
+      <input
+        type="submit"
+        data-disabled_button-disabled
+        data-disabled_button-message
+        data-animate-class
+        data-oninput_change-type=""
+      />
     </form>
-    <button data-type="setTheInputWithRandomNumbers">:D</button>
+    <button data-onclick-type="setTheInputWithRandomNumbers">:D</button>
     <p data-animate-change_placeholder></p>
-    <button data-type="translateElement">Translate</button>
+    <button data-onclick-type="translateElement">Translate</button>
+    <button data-onclick-type="logTheNestedObject">
+      log The Nested Object
+    </button>
   </body>
 
   <script>
     const randomColor = () => {
-        const color = "#" + ((1 << 24) * Math.random() | 0).toString(16);
-        document.documentElement.style.setProperty('--random-color', color);
-    }
+      const color = "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+      document.documentElement.style.setProperty("--random-color", color);
+    };
 
     setInterval(() => {
-      randomColor()
-    }, 1000)
+      randomColor();
+    }, 1000);
   </script>
   <script src="./index.js" type="module"></script>
 </html>
